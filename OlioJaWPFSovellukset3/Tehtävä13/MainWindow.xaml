@@ -1,0 +1,31 @@
+﻿<Window x:Class="LiigaJoukkueSovellus.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Liiga Joukkue Sovellus" Height="350" Width="500">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10">
+            <TextBlock Text="Joukkueen nimi:" VerticalAlignment="Center"/>
+            <TextBox x:Name="JoukkueenNimiTextBox" Width="150" Margin="5"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="10">
+            <TextBlock Text="Kotikaupunki:" VerticalAlignment="Center"/>
+            <TextBox x:Name="KotikaupunkiTextBox" Width="150" Margin="5"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="10">
+            <Button Content="Lisää pelaaja" Click="LisaaPelaajaButton_Click"/>
+            <Button Content="Poista pelaaja" Click="PoistaPelaajaButton_Click" Margin="10,0,0,0"/>
+            <Button Content="Näytä pelaajat" Click="NaytaPelaajatButton_Click" Margin="10,0,0,0"/>
+        </StackPanel>
+
+        <ListBox x:Name="PelaajaListBox" Grid.Row="3" Margin="10"/>
+    </Grid>
+</Window>
