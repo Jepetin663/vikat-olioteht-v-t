@@ -1,0 +1,30 @@
+﻿<Window x:Class="IkkunaLaskuri.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Ikkuna Laskuri" Height="350" Width="500">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10">
+            <TextBlock Text="Ikkunan Leveys (mm):" VerticalAlignment="Center"/>
+            <TextBox x:Name="LeveysTextBox" Width="100" Margin="5"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="10">
+            <TextBlock Text="Ikkunan Korkeus (mm):" VerticalAlignment="Center"/>
+            <TextBox x:Name="KorkeusTextBox" Width="100" Margin="5"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="10">
+            <TextBlock Text="Karmipuun Leveys (mm):" VerticalAlignment="Center"/>
+            <TextBox x:Name="KarmiTextBox" Width="100" Margin="5"/>
+        </StackPanel>
+
+        <Button Content="Laske" Click="LaskeButton_Click" Grid.Row="3" HorizontalAlignment="Center" Margin="10"/>
+    </Grid>
+</Window>
