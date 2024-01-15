@@ -1,0 +1,35 @@
+﻿<Window x:Class="LottoSovellus.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Lotto Arvonta" Height="400" Width="600">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10">
+            <TextBlock Text="Rivien määrä:" VerticalAlignment="Center"/>
+            <TextBox x:Name="RivienMaaraTextBox" Width="50" Margin="5"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="10">
+            <Button Content="Tulosta" Click="TulostaButton_Click" Margin="5"/>
+            <Button Content="Tyhjennä" Click="TyhjennaButton_Click" Margin="5"/>
+            <ComboBox x:Name="PelivalintaComboBox" Width="100" Margin="5">
+                <ComboBoxItem Content="Lotto"/>
+                <ComboBoxItem Content="Viking Lotto"/>
+                <ComboBoxItem Content="Eurojackpot"/>
+            </ComboBox>
+            <Button Content="Viikon Arvonta" Click="ViikonArvontaButton_Click" Margin="5"/>
+            <Button Content="Tarkasta" Click="TarkastaButton_Click" Margin="5"/>
+        </StackPanel>
+
+        <ScrollViewer Grid.Row="4" VerticalScrollBarVisibility="Auto">
+            <TextBlock x:Name="ArvotutRivitTextBlock" Margin="10"/>
+        </ScrollViewer>
+    </Grid>
+</Window>
