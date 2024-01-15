@@ -9,11 +9,27 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10">
-            <TextBox x:Name="TehtavaTextBox" Width="300" Margin="5" />
+            <TextBox x:Name="TehtavaTextBox" Width="200" Margin="5" TextChanged="TehtavaTextBox_TextChanged" />
+            <ComboBox x:Name="PrioriteettiComboBox" Width="80" Margin="5">
+                <ComboBoxItem Content="Korkea"/>
+                <ComboBoxItem Content="Keski"/>
+                <ComboBoxItem Content="Matala"/>
+            </ComboBox>
+            <DatePicker x:Name="DeadlineDatePicker" Width="120" Margin="5"/>
             <Button Content="Lisää" Click="LisaaButton_Click" Margin="5" />
             <Button Content="Tyhjennä" Click="TyhjennaButton_Click" Margin="5" />
         </StackPanel>
 
-        <ListBox x:Name="MuistilistaListBox" Grid.Row="1" Margin="10"/>
+        <ListBox x:Name="MuistilistaListBox" Grid.Row="1" Margin="10">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Nimi}" Width="150"/>
+                        <TextBlock Text="{Binding Prioriteetti}" Width="80"/>
+                        <TextBlock Text="{Binding Deadline}" Width="120"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </Window>

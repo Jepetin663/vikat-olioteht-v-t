@@ -8,27 +8,34 @@ namespace MuistilistaSovellus
 {
     public partial class MainWindow : Window
     {
-        private ObservableCollection<string> tehtavat = new ObservableCollection<string>();
+        private ObservableCollection<Tehtava> tehtavat = new ObservableCollection<Tehtava>();
 
         public MainWindow()
         {
             InitializeComponent();
             MuistilistaListBox.ItemsSource = tehtavat;
 
-            // Lataa tallennetut tehtävät tiedostosta
             LataaTehtavat();
         }
 
         private void LisaaButton_Click(object sender, RoutedEventArgs e)
         {
-            string tehtava = TehtavaTextBox.Text;
+            string tehtavanNimi = TehtavaTextBox.Text;
+            string prioriteetti = ((ComboBoxItem)PrioriteettiComboBox.SelectedItem)?.Content.ToString();
+            DateTime? deadline = DeadlineDatePicker.SelectedDate;
 
-            if (!string.IsNullOrEmpty(tehtava))
+            if (!string.IsNullOrEmpty(tehtavanNimi) && prioriteetti != null)
             {
-                tehtavat.Add(tehtava);
+                Tehtava uusiTehtava = new Tehtava
+                {
+                    Nimi = tehtavanNimi,
+                    Prioriteetti = prioriteetti,
+                    Deadline = deadline
+                };
+
+                tehtavat.Add(uusiTehtava);
                 TehtavaTextBox.Text = string.Empty;
 
-                // Tallenna tehtävät tiedostoon
                 TallennaTehtavat();
             }
         }
@@ -37,7 +44,6 @@ namespace MuistilistaSovellus
         {
             tehtavat.Clear();
 
-            // Tallenna tehtävätiedostoon
             TallennaTehtavat();
         }
 
@@ -47,9 +53,9 @@ namespace MuistilistaSovellus
             {
                 using (StreamWriter writer = new StreamWriter("tehtavat.txt"))
                 {
-                    foreach (string tehtava in tehtavat)
+                    foreach (Tehtava tehtava in tehtavat)
                     {
-                        writer.WriteLine(tehtava);
+                        writer.WriteLine($"{tehtava.Nimi},{tehtava.Prioriteetti},{tehtava.Deadline}");
                     }
                 }
             }
@@ -69,7 +75,18 @@ namespace MuistilistaSovellus
                     {
                         while (!reader.EndOfStream)
                         {
-                            string tehtava = reader.ReadLine();
+                            string[] tehtavaTiedot = reader.ReadLine().Split(',');
+                            string nimi = tehtavaTiedot[0];
+                            string prioriteetti = tehtavaTiedot[1];
+                            DateTime? deadline = string.IsNullOrEmpty(tehtavaTiedot[2]) ? (DateTime?)null : DateTime.Parse(tehtavaTiedot[2]);
+
+                            Tehtava tehtava = new Tehtava
+                            {
+                                Nimi = nimi,
+                                Prioriteetti = prioriteetti,
+                                Deadline = deadline
+                            };
+
                             tehtavat.Add(tehtava);
                         }
                     }
@@ -80,5 +97,17 @@ namespace MuistilistaSovellus
                 MessageBox.Show($"Latausvirhe: {ex.Message}");
             }
         }
+
+        private void TehtavaTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+    }
+
+    public class Tehtava
+    {
+        public string Nimi { get; set; }
+        public string Prioriteetti { get; set; }
+        public DateTime? Deadline { get; set; }
     }
 }
